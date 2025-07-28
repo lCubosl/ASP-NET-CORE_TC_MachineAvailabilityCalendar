@@ -72,5 +72,12 @@ namespace TC_MachineAvailabilityCalendar.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        // temporary
+        public async Task<IActionResult> Calendar(int id)
+        {
+            var item = await _context.Items.FindAsync(id);
+            return View(item);
+        }
     }
 }

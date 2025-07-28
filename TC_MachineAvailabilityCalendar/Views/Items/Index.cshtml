@@ -11,6 +11,7 @@
         <tr>
             <th>Name</th>
             <th>ImageUrl</th>
+            <th>Availability</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,6 +22,9 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.ImageUrl</td>
+                <td>
+                    <a asp-action="Calendar" asp-route-id="@item.Id">View Calendar</a>
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
