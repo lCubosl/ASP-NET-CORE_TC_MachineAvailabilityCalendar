@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TC_MachineAvailabilityCalendar", "TC_MachineAvailabilityCalendar\TC_MachineAvailabilityCalendar.csproj", "{417A17B1-8E62-42FA-AAE8-F52A4A8E058A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{417A17B1-8E62-42FA-AAE8-F52A4A8E058A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417A17B1-8E62-42FA-AAE8-F52A4A8E058A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417A17B1-8E62-42FA-AAE8-F52A4A8E058A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417A17B1-8E62-42FA-AAE8-F52A4A8E058A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8746E46-A066-4A60-9D4B-311EDF8926C6}
+	EndGlobalSection
+EndGlobal
