@@ -12,7 +12,7 @@
             <th>Name</th>
             <th>ImageUrl</th>
             <th>Availability</th>
-            <th>Actions</th>
+            <th class="text-end">Actions</th>
         </tr>
     </thead>
 
@@ -21,13 +21,16 @@
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.ImageUrl</td>
                 <td>
-                    <a asp-action="Calendar" asp-route-id="@item.Id">View Calendar</a>
+                    <img src="~/images/@item.ImageUrl" alt="@item.Name" style="height:40px; width:auto" />
                 </td>
+
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-info text-white" asp-action="Calendar" asp-route-id="@item.Id">View Calendar</a>
+                </td>
+                <td class="text-end">
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
