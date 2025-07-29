@@ -4,5 +4,22 @@
     ViewData["Title"] = "Calendar";
 }
 
-<p>Calendar:@Model.Name Id:@Model.Id</p>
-<img src="~/images/@Model.ImageUrl" alt="@Model.Name" style="height:500px; width:auto" />
+<h3>Calendar:@Model.Name</h3>
+
+<div class="mt-2">
+    <img src="~/images/@Model.ImageUrl" alt="@Model.Name" style="height:300px; width:auto" />
+</div>
+
+<form class="mt-2">
+    <label for="start">Start Date:</label>
+    <input type="date" id="start" name="startDate" />
+
+    <label for="end">End Date:</label>
+    <input type="date" id="end" name="endDate" />
+
+    <input type="submit" />
+</form>
+
+<div class="mt-2">
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>
