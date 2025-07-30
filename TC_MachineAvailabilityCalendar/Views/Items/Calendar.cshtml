@@ -4,21 +4,52 @@
     ViewData["Title"] = "Calendar";
 }
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <h3>Calendar:@Model.Name</h3>
 
 <div class="mt-2">
     <img src="~/images/@Model.ImageUrl" alt="@Model.Name" style="height:300px; width:auto" />
 </div>
 
-<form class="mt-2">
-    <label for="start">Start Date:</label>
-    <input type="date" id="start" name="startDate" />
+<form asp-action="AddSchedule" asp-route-id="@Model.Id" method="post" class="mt-2">
+    <label for="start">Submit Date:</label>
+    <input type="date" id="start" name="startDate" required />
 
-    <label for="end">End Date:</label>
-    <input type="date" id="end" name="endDate" />
-
-    <input type="submit" />
+    <input type="submit" value="Add Date" class="btn btn-primary" />
 </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Machine</th>
+            <th>Scheduled For</th>
+            <th>Scheduled By</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+    
+    <tbody> 
+        @foreach (var schedule in Model.Schedules.OrderBy(s => s.ScheduleDate))
+        {
+        <tr>
+            <td>@Model.Name</td>            
+            <td>
+                @schedule.ScheduleDate.ToString("dd/MM/yyyy")
+            </td>
+            <td class="text-secondary">temp</td>            
+            <td class="text-end">
+                <a asp-action="ConfirmDeleteSchedule" asp-route-scheduleId="@schedule.Id" class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+            </td>
+        </tr> 
+        }
+    </tbody>
+</table>
 
 <div class="mt-2">
     <a asp-action="Index" class="btn btn-secondary">Back</a>

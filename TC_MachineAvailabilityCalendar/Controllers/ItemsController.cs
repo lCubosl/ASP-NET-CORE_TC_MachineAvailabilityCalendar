@@ -13,6 +13,7 @@ namespace TC_MachineAvailabilityCalendar.Controllers
             _context = context;
         }
 
+        // ITEM
         // Lists items index on /index page
         public async Task<IActionResult> Index()
         {
@@ -73,11 +74,78 @@ namespace TC_MachineAvailabilityCalendar.Controllers
             return RedirectToAction("Index");
         }
 
-        // temporary
+        // SCHEDULE
+        // controller passes item with schedules
         public async Task<IActionResult> Calendar(int id)
         {
-            var item = await _context.Items.FindAsync(id);
+            var item = await _context.Items
+                .Include(i => i.Schedules)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (item == null)
+                return NotFound();
+
             return View(item);
+        }
+
+        // Create Schedule date
+        public async Task<IActionResult> AddSchedule(int id, DateTime startDate)
+        {
+            var item = await _context.Items
+                .Include(i => i.Schedules)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (item == null)
+                return NotFound();
+
+            // check if schedule already exists for specified date
+            bool dateExists = item.Schedules.Any(s => s.ScheduleDate.Date == startDate.Date);
+            if (dateExists)
+            {
+                TempData["Error"] = "That machine is already scheduled for use in this Date.";
+                return RedirectToAction("Calendar", new { id });
+            }
+
+            var newSchedule = new Schedule
+            {
+                ItemId = id,
+                ScheduleDate = startDate
+            };
+
+            _context.Schedules.Add(newSchedule);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Calendar", new {id});
+        }
+
+        // confirmation delete VIEW
+        [HttpGet]
+        public async Task<IActionResult> ConfirmDeleteSchedule(int scheduleId)
+        {
+            var item = await _context.Schedules
+                .Include(s => s.Item)
+                .FirstOrDefaultAsync(s => s.Id == scheduleId);
+            
+            if (item == null) 
+                return NotFound();
+
+            return View(item);
+        }
+
+        // Delete a scheduled date
+        [HttpPost]
+        public async Task<IActionResult> DeleteScheduledDate(int scheduleId)
+        {
+            var item = await _context.Schedules.FindAsync(scheduleId);
+            if (item == null) 
+                return NotFound();
+
+            int itemId = item.ItemId;
+
+            _context.Schedules.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Calendar", new { id = itemId });
         }
     }
 }
